@@ -31,7 +31,7 @@ fi
 ##########################################################
 
     INJECTOR="./helpers/injection.sh"
-    IMG="$(pwd)/shims/$1/dedede.bin"
+    IMG="$(pwd)/shims/$1/$1.bin"
 
     chmod +x "$INJECTOR"
     [[ -f "$IMG" ]] || { echo ; echo " >> WARN: Build image missing!"; exit 1; }
@@ -43,7 +43,7 @@ fi
     echo " >> DONE! Your image should be located in \"./sh1mmer-payload.bin\"."
     echo " >> NOTE: You can flash this image to your flash drive or SD card using the following command:"
     echo
-    echo " dd if=./sh1mmer-payload.bin of=/dev/sdx"
+    echo " dd if=./build/$1.bin of=/dev/sdx"
     echo
     echo " >> NOTE: \"/dev/sdx\" should be replaced with the block device representing your flash drive or SD card."
 
