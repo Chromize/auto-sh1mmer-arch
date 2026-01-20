@@ -12,9 +12,10 @@ echo " >> WORK: Installing required dependencies..."
 echo
 
 DEPS=(
-    base-devel git curl wget xz zip unzip rsync cpio bc patch make gcc flex bison lzop
-    util-linux e2fsprogs dosfstools mtools openssl ca-certificates sudo which file repo
-    python python-setuptools python-virtualenv python-requests python-six python-pyelftools
+    curl
+    unzip
+    ca-certificates
+    pv
 )
 
 errfile="$(mktemp)"
@@ -32,6 +33,7 @@ if [ $status -ne 0 ]; then
             SKIPPED+=("$pkg")
         fi
     done < "$errfile"
+
     if [ "${#SKIPPED[@]}" -gt 0 ]; then
         INSTALL_DEPS=()
         for pkg in "${DEPS[@]}"; do
@@ -44,6 +46,7 @@ if [ $status -ne 0 ]; then
             done
             $skip || INSTALL_DEPS+=("$pkg")
         done
+
         if [ "${#INSTALL_DEPS[@]}" -gt 0 ]; then
             sudo pacman -S --needed --noconfirm "${INSTALL_DEPS[@]}"
         fi
@@ -56,6 +59,7 @@ fi
 
 rm -f "$errfile"
 echo
+
 if [ "${#SKIPPED[@]}" -gt 0 ]; then
     echo " >> NOTE: The following packages were skipped due to conflicts:"
     for p in "${SKIPPED[@]}"; do

@@ -31,12 +31,14 @@ fi
 ##########################################################
 
     INJECTOR="./helpers/injection.sh"
-    IMG=~/chromiumos/chroot/mnt/imgs/build_shim.bin
+    IMG="$(pwd)/shims/$1/dedede.bin"
 
     chmod +x "$INJECTOR"
-    [[ -f "$IMG" ]] || { echo "Build image missing!"; exit 1; }
+    [[ -f "$IMG" ]] || { echo ; echo " >> WARN: Build image missing!"; exit 1; }
     "$INJECTOR" "$IMG"
 
+    echo
+    echo " >> NOTE: It's recommended you flash this using Chrome Recovery Utility, available on Windows as a Chrome extension."
     echo
     echo " >> DONE! Your image should be located in \"./sh1mmer-payload.bin\"."
     echo " >> NOTE: You can flash this image to your flash drive or SD card using the following command:"
