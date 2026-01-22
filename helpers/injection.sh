@@ -23,7 +23,7 @@ fi
 
 cd ./sh1mmer/wax
 wget -O chromebrew.tar.gz \
-    https://raw.githubusercontent.com/Chromize/sh1mmer-archives/main/chromebrew.tar.gz
+    https://raw.githubusercontent.com/Chromize/chromeOS-archives/main/chromebrew.tar.gz
 
 sudo modprobe loop
 sudo losetup -f >/dev/null || { echo " >> FAIL: No free loop devices"; exit 1; }
